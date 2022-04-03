@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.*;
 
+//
+
 public class MyClient {
 	public static void main(String[] args) throws Exception{
 	
@@ -17,6 +19,7 @@ public class MyClient {
 		int max = 0;
 		int idx = 0;
 		String lrrName = "";
+		int totalServers = 0;
 		
 		dout.write(client.getBytes());
 		dout.flush();
@@ -119,7 +122,16 @@ public class MyClient {
      		String[] temp = nRec[max].split(" ");
      		lrrName = temp[0];
      		
+     		for (int r = 0; r < nRec.length; r++) {
+     			if (nRec[r].contains(lrrName)) {
+     				totalServers++;
+     			}
+     		}
+     		
+     		int currServer = 1;
+     		
      		System.out.println(lrrName);
+     		System.out.println(totalServers);
      		
      		client = "OK\n";
      		dout.write(client.getBytes());
@@ -157,12 +169,16 @@ public class MyClient {
      				//dout.write(client.getBytes());
      				//dout.flush();
   				if(strServer.contains("JOBN")){    
-     					client = "SCHD " + count + " " + lrrName + " 0\n";
+     					client = "SCHD " + count + " " + lrrName + " " + currServer + "\n";
      					dout.write(client.getBytes());
      					dout.flush();
      					strServer = dis.readLine();
      					System.out.println(strServer);
      					count++;
+     					currServer++;
+     					if (currServer == totalServers) {
+     						currServer = 0;
+     					}
     //  strServer = dis.readLine();
     //  System.out.println("message= "+strServer);
     //  dout.flush();
