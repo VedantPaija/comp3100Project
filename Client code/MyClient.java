@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
 
-//
+//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
 
 public class MyClient {
 	public static void main(String[] args) throws Exception{
@@ -128,7 +128,7 @@ public class MyClient {
      			}
      		}
      		
-     		int currServer = 1;
+     		int currServer = 0;
      		
      		System.out.println(lrrName);
      		System.out.println(totalServers);
